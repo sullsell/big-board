@@ -1,9 +1,10 @@
 # Sully's Big Board
 
 A single-page site that shows your personal fantasy football draft rankings.
-Built with Next.js + Tailwind, using shadcn/ui-style components (Badge, plus
-a custom tier-divider component). No database, no backend — it's a static
-page that reads from one data file.
+Built with Next.js + Tailwind, using real [shadcn/ui](https://ui.shadcn.com)
+components (Badge, Separator) retinted to the board's own color tokens, plus
+a custom tier-divider component built on top of them. No database, no
+backend — it's a static page that reads from one data file.
 
 ## Update your rankings
 
@@ -65,13 +66,29 @@ app/
   page.tsx          — the whole UI (header, filters, tiers, rows)
   globals.css        — theme tokens and base styles
 components/ui/
-  badge.tsx          — shadcn-style badge (position/value/reach/risk tags)
-  tier-divider.tsx    — the yard-line style tier separator
+  badge.tsx          — shadcn Badge (position/value/reach/risk tags)
+  separator.tsx       — shadcn Separator (used by tier-divider)
+  tier-divider.tsx    — the yard-line style tier separator, built on Separator
 data/
   rankings.ts        — YOUR RANKINGS — edit this file
 lib/
   utils.ts           — shadcn's cn() class-merging helper
 ```
+
+Components are managed with the [shadcn CLI](https://ui.shadcn.com/docs/cli)
+(`components.json` holds its config). To add another component:
+
+```bash
+npx shadcn@latest add <component>
+```
+
+Note this project is on Tailwind v3, while the shadcn CLI now defaults to
+v4-style theming (semantic tokens like `bg-primary`, CSS variables in
+`app/globals.css`). Newly added components will reference those tokens —
+either add them to `tailwind.config.ts`/`globals.css`, or restyle the
+component's `variant` classes to use the board's existing tokens (`chalk`,
+`gold`, `hash`, `field`, `line`), the way `badge.tsx` and `separator.tsx`
+already do.
 
 ## Design notes
 
