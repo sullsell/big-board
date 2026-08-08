@@ -1,6 +1,5 @@
 import { SiteNav } from "@/components/site-nav";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { getMockDrafts } from "@/lib/mock-drafts";
 import type { MockDraft } from "@/data/mock-drafts";
 
@@ -106,9 +105,7 @@ function MockDraftCard({ draft }: { draft: MockDraft }) {
 
       {draft.notes && <p className="mt-2 text-sm text-chalk-dim">{draft.notes}</p>}
 
-      <Separator className="my-3" />
-
-      <div className="flex flex-col divide-y divide-line">
+      <div className="mt-3 flex flex-col divide-y divide-line">
         {draft.picks.map((pick) => (
           <div
             key={pick.id}

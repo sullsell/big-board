@@ -1,9 +1,8 @@
 # Sully's Big Board
 
 A single-page site that shows your personal fantasy football draft rankings.
-Built with Next.js + Tailwind, using real [shadcn/ui](https://ui.shadcn.com)
-components (Badge, Separator) retinted to the board's own color tokens, plus
-a custom tier-divider component built on top of them. No database, no
+Built with Next.js + Tailwind, using a real [shadcn/ui](https://ui.shadcn.com)
+Badge component retinted to the board's own color tokens. No database, no
 backend — it's a static page that reads from one data file.
 
 ## Update your rankings
@@ -103,8 +102,7 @@ components/
   site-nav.tsx            — tab nav shared by both pages
   ui/
     badge.tsx               — shadcn Badge (position/value/reach/risk tags)
-    separator.tsx            — shadcn Separator (used by tier-divider)
-    tier-divider.tsx         — the yard-line style tier separator, built on Separator
+    tier-divider.tsx         — the tier group label above each tier's players
 data/
   rankings.csv           — YOUR RANKINGS — edit this file
   rankings.ts             — TypeScript types for player data
@@ -136,17 +134,18 @@ v4-style theming (semantic tokens like `bg-primary`, CSS variables in
 `app/globals.css`). Newly added components will reference those tokens —
 either add them to `tailwind.config.ts`/`globals.css`, or restyle the
 component's `variant` classes to use the board's existing tokens (`chalk`,
-`gold`, `hash`, `field`, `line`), the way `badge.tsx` and `separator.tsx`
-already do.
+`gold`, `hash`, `field`, `line`), the way `badge.tsx` already does.
 
 ## Design notes
 
 The look is a "war room whiteboard": deep chalkboard green background,
 chalk-white type, condensed athletic display font (Oswald) for headers and
 rank numbers, monospace (IBM Plex Mono) for stats like bye week and ADP.
-Tier breaks are rendered as yard-line style dividers rather than plain
+Tier breaks are rendered as small gold-accented labels rather than plain
 numbered headers, since tiers actually encode talent cliffs — not just a
-sequential list.
+sequential list. Thin lines separate individual player rows within a tier,
+but the page background itself stays solid — no ruled lines running
+through it.
 
 Position filter tabs at the top (ALL / QB / RB / WR / TE) let visitors
 narrow the board to one position without leaving the page.

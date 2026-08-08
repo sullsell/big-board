@@ -56,7 +56,7 @@ export function BigBoard({ rankings }: { rankings: Player[] }) {
         <SiteNav />
 
         {/* Position filter tabs */}
-        <nav className="mt-3 flex gap-1.5 overflow-x-auto border-t border-line pt-3">
+        <nav className="mt-4 flex gap-1.5 overflow-x-auto">
           {POSITIONS.map((pos) => (
             <button
               key={pos}
