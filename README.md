@@ -21,6 +21,20 @@ else (tiers, sort order, value/reach badges) derives from it. If a field
 (like `notes`) contains a comma, wrap it in double quotes as shown above.
 That's the only file you need to touch day to day.
 
+The board currently holds all 516 players from a FantasyPros "ALL Rankings"
+export. To refresh it later from an updated export:
+
+1. Drop the new export at `data/FantasyPros_2026_Draft_ALL_Rankings.csv`
+   (same filename/column layout FantasyPros exports by default).
+2. Run `npm run import:rankings` — this regenerates `data/rankings.csv` from
+   it via `scripts/import-fantasypros.mjs` (maps `RK`→rank, `TIERS`→tier,
+   position codes like `WR1`→`WR`, derives `adp` from rank + their "ECR vs.
+   ADP" column, and `risk` from their Bust rating).
+3. Delete the FantasyPros export afterward — it's just import input, the app
+   never reads it. Note the import overwrites `tierLabel` and `notes` (blank
+   in the FantasyPros export), so any hand-written ones you'd added are lost
+   on re-import; re-add them after if you want them back.
+
 ## Log a mock draft
 
 Mock draft results live in **`data/mock-drafts.csv`** — one row per pick,
@@ -113,6 +127,8 @@ lib/
   csv.ts                  — shared build-time CSV parser
   rankings.ts              — parses rankings.csv at build time
   mock-drafts.ts            — parses mock-drafts.csv at build time
+scripts/
+  import-fantasypros.mjs — regenerates rankings.csv from a FantasyPros export
 ```
 
 Both data files are parsed with Node's `fs` at build time, so they only
