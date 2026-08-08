@@ -8,9 +8,19 @@ backend — it's a static page that reads from one data file.
 
 ## Update your rankings
 
-Everything you show on the page lives in **`data/rankings.ts`**. Edit that
-array — rank, player, team, position, tier, bye, ADP, risk, notes — save,
-and the page updates. That's the only file you need to touch day to day.
+Everything you show on the page lives in **`data/rankings.csv`** — one row
+per player:
+
+```csv
+rank,player,team,position,tier,tierLabel,bye,adp,risk,notes
+1,Ja'Marr Chase,CIN,WR,1,Set the table,10,2,Low,"Elite target share, WR1 overall in most formats."
+```
+
+Edit that file — rank, player, team, position, tier, bye, ADP, risk, notes —
+save, and the page updates. Keep `rank` unique and sequential; everything
+else (tiers, sort order, value/reach badges) derives from it. If a field
+(like `notes`) contains a comma, wrap it in double quotes as shown above.
+That's the only file you need to touch day to day.
 
 ## Log a mock draft
 
@@ -44,7 +54,7 @@ npm run dev
 ```
 
 Then open http://localhost:3000 — you'll see live updates as you edit
-`data/rankings.ts`.
+`data/rankings.csv`.
 
 ## Deploy to GitHub Pages
 
@@ -62,7 +72,7 @@ cleanly to GitHub Pages via the included workflow at
 3. Push to `main` (or re-run the workflow from the **Actions** tab). The
    workflow builds the static site and deploys it — your board will be live
    at `https://<your-username>.github.io/<repo-name>/`.
-4. Every time you edit `data/rankings.ts` and push to `main`, the site
+4. Every time you edit `data/rankings.csv` and push to `main`, the site
    redeploys automatically.
 
 `next.config.mjs` auto-detects the repo name from GitHub Actions and sets
@@ -85,23 +95,34 @@ again after editing your rankings.
 ```
 app/
   layout.tsx           — fonts + page shell
-  page.tsx              — Big Board UI (header, filters, tiers, rows)
-  mock-drafts/page.tsx   — Mock Drafts UI (stats + draft history cards)
+  page.tsx              — reads rankings.csv, renders <BigBoard>
+  mock-drafts/page.tsx   — reads mock-drafts.csv, renders the tab directly
   globals.css            — theme tokens and base styles
 components/
-  site-nav.tsx           — tab nav shared by both pages
+  big-board.tsx          — Big Board UI (header, filters, tiers, rows)
+  site-nav.tsx            — tab nav shared by both pages
   ui/
-    badge.tsx              — shadcn Badge (position/value/reach/risk tags)
-    separator.tsx           — shadcn Separator (used by tier-divider)
-    tier-divider.tsx        — the yard-line style tier separator, built on Separator
+    badge.tsx               — shadcn Badge (position/value/reach/risk tags)
+    separator.tsx            — shadcn Separator (used by tier-divider)
+    tier-divider.tsx         — the yard-line style tier separator, built on Separator
 data/
-  rankings.ts            — YOUR RANKINGS — edit this file
+  rankings.csv           — YOUR RANKINGS — edit this file
+  rankings.ts             — TypeScript types for player data
   mock-drafts.csv         — YOUR MOCK DRAFTS — edit this file
   mock-drafts.ts           — TypeScript types for mock draft data
 lib/
   utils.ts               — shadcn's cn() class-merging helper
-  mock-drafts.ts          — parses mock-drafts.csv at build time
+  csv.ts                  — shared build-time CSV parser
+  rankings.ts              — parses rankings.csv at build time
+  mock-drafts.ts            — parses mock-drafts.csv at build time
 ```
+
+Both data files are parsed with Node's `fs` at build time, so they only
+ever run server-side — the CSVs themselves never ship to the browser, only
+the HTML/JSON they render into. The Big Board's interactive parts (the
+position filter) live in `components/big-board.tsx`, a client component
+that receives the parsed rankings as a prop from the server-rendered
+`app/page.tsx`.
 
 Components are managed with the [shadcn CLI](https://ui.shadcn.com/docs/cli)
 (`components.json` holds its config). To add another component:
