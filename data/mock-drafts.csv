@@ -1,0 +1,4 @@
+mock_id,date,source,teams,slot,round,pick,player,position,team,notes
+example,2026-08-01,Sleeper,12,4,1,4,Ja'Marr Chase,WR,CIN,Delete this sample draft and log your own below — one row per pick.
+example,2026-08-01,Sleeper,12,4,2,21,Breece Hall,RB,NYJ,
+example,2026-08-01,Sleeper,12,4,3,28,Trey McBride,TE,ARI,

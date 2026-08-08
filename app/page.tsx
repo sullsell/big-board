@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { rankings, type Position } from "@/data/rankings";
 import { Badge } from "@/components/ui/badge";
 import { TierDivider } from "@/components/ui/tier-divider";
+import { SiteNav } from "@/components/site-nav";
 import { cn } from "@/lib/utils";
 
 const POSITIONS: (Position | "ALL")[] = ["ALL", "QB", "RB", "WR", "TE"];
@@ -52,8 +53,10 @@ export default function Page() {
           </p>
         </div>
 
+        <SiteNav />
+
         {/* Position filter tabs */}
-        <nav className="mt-5 flex gap-1.5 overflow-x-auto">
+        <nav className="mt-3 flex gap-1.5 overflow-x-auto border-t border-line pt-3">
           {POSITIONS.map((pos) => (
             <button
               key={pos}
