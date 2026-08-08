@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-field text-chalk font-body antialiased;
+    background-image:
+      linear-gradient(rgba(244, 240, 228, 0.035) 1px, transparent 1px);
+    background-size: 100% 3rem;
+  }
+  ::selection {
+    @apply bg-gold/30 text-chalk;
+  }
+  :focus-visible {
+    outline: 2px solid theme("colors.gold");
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
