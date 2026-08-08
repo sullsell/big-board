@@ -23,7 +23,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Big Board — 2026 Fantasy Rankings",
+  title: "Sully's Big Board — 2026 Fantasy Rankings",
   description: "Personal fantasy football draft rankings.",
 };
 

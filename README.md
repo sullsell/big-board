@@ -1,4 +1,4 @@
-# Big Board
+# Sully's Big Board
 
 A single-page site that shows your personal fantasy football draft rankings.
 Built with Next.js + Tailwind, using shadcn/ui-style components (Badge, plus

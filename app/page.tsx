@@ -44,7 +44,7 @@ export default function Page() {
               2026 Draft — Personal Board
             </p>
             <h1 className="font-display text-4xl font-bold uppercase tracking-tight text-chalk sm:text-5xl">
-              Big Board
+              Sully's Big Board
             </h1>
           </div>
           <p className="hidden font-mono text-xs text-chalk-dim sm:block">
