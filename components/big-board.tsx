@@ -81,7 +81,6 @@ export function BigBoard({ rankings }: { rankings: Player[] }) {
             <TierDivider tier={tierNum} label={players[0]?.tierLabel} />
             <div className="flex flex-col divide-y divide-line">
               {players.map((p) => {
-                const delta = p.adp - p.rank;
                 return (
                   <article
                     key={p.rank}
@@ -115,11 +114,6 @@ export function BigBoard({ rankings }: { rankings: Player[] }) {
                         <span title="Bye week">BYE {p.bye}</span>
                         <span title="Consensus ADP">ADP {p.adp}</span>
                       </div>
-                      {delta !== 0 && (
-                        <Badge variant={delta > 0 ? "value" : "reach"}>
-                          {delta > 0 ? `+${delta} value` : `${delta} reach`}
-                        </Badge>
-                      )}
                     </div>
                   </article>
                 );

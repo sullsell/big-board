@@ -17,9 +17,9 @@ rank,player,team,position,tier,tierLabel,bye,adp,risk,notes
 
 Edit that file — rank, player, team, position, tier, bye, ADP, risk, notes —
 save, and the page updates. Keep `rank` unique and sequential; everything
-else (tiers, sort order, value/reach badges) derives from it. If a field
-(like `notes`) contains a comma, wrap it in double quotes as shown above.
-That's the only file you need to touch day to day.
+else (tiers, sort order) derives from it. If a field (like `notes`) contains
+a comma, wrap it in double quotes as shown above. That's the only file you
+need to touch day to day.
 
 The board currently holds all 516 players from a FantasyPros "ALL Rankings"
 export. To refresh it later from an updated export:
@@ -115,7 +115,7 @@ components/
   big-board.tsx          — Big Board UI (header, filters, tiers, rows)
   site-nav.tsx            — tab nav shared by both pages
   ui/
-    badge.tsx               — shadcn Badge (position/value/reach/risk tags)
+    badge.tsx               — shadcn Badge (position/risk tags)
     tier-divider.tsx         — the tier group label above each tier's players
 data/
   rankings.csv           — YOUR RANKINGS — edit this file

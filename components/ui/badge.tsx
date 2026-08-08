@@ -10,8 +10,6 @@ const badgeVariants = cva(
     variants: {
       variant: {
         position: "border-chalk-dim/30 bg-field text-chalk-dim uppercase",
-        value: "border-gold/40 bg-gold/10 text-gold",
-        reach: "border-hash/40 bg-hash/10 text-hash",
         neutral: "border-line bg-transparent text-chalk-dim",
         risk: "border-line bg-transparent text-chalk-dim uppercase",
       },
