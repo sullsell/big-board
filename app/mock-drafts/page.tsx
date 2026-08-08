@@ -58,10 +58,6 @@ export default function MockDraftsPage() {
           drafts.map((draft) => <MockDraftCard key={draft.id} draft={draft} />)
         )}
       </div>
-
-      <footer className="mt-16 border-t border-line pt-6 text-center font-mono text-[11px] uppercase tracking-widest2 text-chalk-dim">
-        Edit data/mock-drafts.csv to log a new mock draft
-      </footer>
     </main>
   );
 }

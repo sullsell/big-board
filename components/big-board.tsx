@@ -134,10 +134,6 @@ export function BigBoard({ rankings }: { rankings: Player[] }) {
           </p>
         )}
       </div>
-
-      <footer className="mt-16 border-t border-line pt-6 text-center font-mono text-[11px] uppercase tracking-widest2 text-chalk-dim">
-        Edit data/rankings.csv to update this board
-      </footer>
     </main>
   );
 }
